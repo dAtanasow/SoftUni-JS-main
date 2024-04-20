@@ -6,5 +6,5 @@ function isSymmetric(arr) {
     let equal = (JSON.stringify(arr) == JSON.stringify(reversed));
     return equal;
 }
-isSymmetric([1,2])
+
 export { isSymmetric }
