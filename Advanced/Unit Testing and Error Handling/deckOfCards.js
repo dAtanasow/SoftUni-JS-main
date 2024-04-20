@@ -15,8 +15,8 @@ function createCard(arr) {
         let suit = array.pop();
         let face = array.join('')
         const card = {
-            myFace: face,
-            mySuit: cards.suits[suit]
+            face: face,
+            suit: cards.suits[suit]
         }
 
         if (!cards.faces.includes(face)) {
@@ -24,7 +24,7 @@ function createCard(arr) {
             console.error(`Invalid card: ${currentCard}`);
             return;
         }
-        deck.push(card.myFace + card.mySuit);
+        deck.push(card.face + card.suit);
     }
     console.log(deck.join(' '));
 
