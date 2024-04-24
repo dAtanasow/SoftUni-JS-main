@@ -18,6 +18,7 @@ function validate(obj) {
     const versions = [
         'HTTP/0.9', 'HTTP/1.0', 'HTTP/1.1', 'HTTP/2.0'
     ]
+    const forbiddenSymbols = ['/','<', '>', '&', "'", '"']
 
 
     if (!obj.hasOwnProperty('method') || !methods.includes(obj.method)) {
@@ -26,10 +27,10 @@ function validate(obj) {
     if (!obj.hasOwnProperty('uri') || !/^(\*|\/|[A-Za-z0-9.]+)$/.test(obj.uri)) {
         throw new Error(`Invalid request header: Invalid URI`)
     }
-    if (!obj.hasOwnProperty('version') || !versions.includes(obj.version)) {
+    if (!obj.hasOwnProperty('version') || !versions.includes(obj.version) || obj.version == '') {
         throw new Error(`Invalid request header: Invalid Version`)
     }
-    if (!obj.hasOwnProperty('message') ||  /[<>&'"]/.test(obj.message)) {
+    if (!obj.hasOwnProperty('message') ||  forbiddenSymbols.includes(obj.message)) {
         throw new Error(`Invalid request header: Invalid Message`)
     }
     return obj;
