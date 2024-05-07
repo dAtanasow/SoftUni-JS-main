@@ -26,7 +26,7 @@ class List {
         if (index < 0 || index >= this.list.length) {
             throw new Error('Index is out of range.')
         }
-        return new List(this.list.splice(1, index))
+        return new List(this.list.splice(index, 1))
     }
 
     get(index) {
