@@ -8,7 +8,6 @@ function solve() {
         nextStopId: 'depot'
     }
 
-
     const url = "http://localhost:3030/jsonstore/bus/schedule/"
 
     async function depart() {
@@ -25,9 +24,8 @@ function solve() {
             departBtn.disabled = true;
             arriveBtn.disabled = true;
         }
-       
     }
-
+    
     function arrive() {
         infoSpanRef.textContent = "Arrive " + stop.currentStopId;
         departBtn.disabled = false;
