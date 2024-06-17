@@ -40,7 +40,6 @@ async function lockedProfile() {
         const button = profileInfo.querySelector('button')
         button.addEventListener('click', () => {
             const isLocked = profileInfo.querySelector("input[type='radio']:checked").value === "lock";
-debugger
             if (!isLocked) {
                 if (hiddenInfo.style.display === 'none' || hiddenInfo.style.display === "") {
                     hiddenInfo.style.display = 'block';
