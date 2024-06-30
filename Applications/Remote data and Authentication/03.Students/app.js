@@ -1,55 +1,53 @@
-async function getStudentInfo() {
-    const formRef = document.getElementById("form");
-    const url = "http://localhost:3030/jsonstore/collections/students"
+const url = "http://localhost:3030/jsonstore/collections/students"
+const formRef = document.getElementById("form");
+formRef.addEventListener("submit", onSubmit);
 
-    const container = document.createElement("div");
-    container.classList.add("students");
+const tbody = document.querySelector("tbody");
 
+
+getStudents();
+async function getStudents() {
     const response = await fetch(url);
     const data = await response.json();
     Object.values(data).forEach(rec => {
         let studentInfo = createRecord(rec);
-        container.appendChild(studentInfo);
+        tbody.appendChild(studentInfo)
     })
-
-    formRef.appendChild(container)
-
-    function createRecord(data) {
-        const div = document.createElement("div");
-        div.innerHTML = `<input type="text" name="firstName" value=${data.firstName}>
-            <input type="text" name="lastName" value=${data.lastName}>
-            <input type="text" name="facultyNumber" value=${data.facultyNumber}>
-            <input type="text" name="grade"  value=${data.grade}>`;
-
-        return div;
-    }
-
-    document.getElementById("submit").addEventListener("click", onSubmit);
-
-    async function onSubmit(e) {
-        e.preventDefault();
-        let firstNameRef = document.querySelector("input[name='firstName']");
-        let lastNameRef = document.querySelector("input[name='lastName']");
-        let facultyNumberRef = document.querySelector("input[name='facultyNumber']");
-        let gradeRef = document.querySelector("input[name='grade']");
-
-        let firstName = firstNameRef.value;
-        let lastName = lastNameRef.value;
-        let facultyNumber = facultyNumberRef.value;
-        let grade = gradeRef.value;
-        let data = {
-            firstName,
-            lastName,
-            facultyNumber,
-            grade
-        }
-        let div = createRecord(data);
-        container.appendChild(div);
-        firstNameRef.value = '';
-        lastNameRef.value = '';
-        facultyNumberRef.value = '';
-        gradeRef.value = '';
-
-    }
 }
-getStudentInfo();
+async function onSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    let newStudentInfo = Object.fromEntries(formData)
+    if (!newStudentInfo.firstName || !newStudentInfo.lastName ||
+        !newStudentInfo.facultyNumber || !newStudentInfo.grade) {
+        return;
+    }
+    await fetch(url, {
+        method: "POST",
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify(newStudentInfo)
+    })
+    tbody.innerHTML = "";
+    getStudents();
+    formRef.reset();
+}
+
+function createRecord(data) {
+    let tr = document.createElement("tr");
+    let firstName = document.createElement("td");
+    let lastName = document.createElement("td");
+    let facultyNumber = document.createElement("td");
+    let grade = document.createElement("td")
+
+    firstName.textContent = data.firstName;
+    lastName.textContent = data.lastName;
+    facultyNumber.textContent = data.facultyNumber;
+    grade.textContent = data.grade;
+
+    tr.appendChild(firstName);
+    tr.appendChild(lastName);
+    tr.appendChild(facultyNumber);
+    tr.appendChild(grade);
+
+    return tr;
+}
