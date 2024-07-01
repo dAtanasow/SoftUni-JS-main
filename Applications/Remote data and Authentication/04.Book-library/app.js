@@ -32,9 +32,9 @@ function library() {
         const response = await fetch(url);
         const data = await response.json();
         tbody.innerHTML = ""
-        
-        Object.entries(data).forEach(([rec, id]) => {
-            let book = createTr(id, rec);
+
+        Object.entries(data).forEach(([id, rec]) => {
+            let book = createTr(rec, id);
             tbody.appendChild(book);
         })
     }
@@ -69,7 +69,7 @@ function library() {
     async function onEdit(e) {
         e.preventDefault()
         let id = e.target.dataset.id;
-
+        document.querySelectorAll("#form").forEach(x => { x.remove() })
         formRef.style.display = "none"
         const form = document.createElement('form');
         form.setAttribute('id', 'form');
@@ -92,7 +92,7 @@ function library() {
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const formData = new FormData(e.target);
             let data = {
                 title: formData.get('title'),
