@@ -3,7 +3,7 @@ function setUserData(userData) {
 }
 
 function getUserData() {
-    return JSON.parse(sessionStorage.getItem('userData'));
+    return JSON.parse(sessionStorage.getItem("userData"));
 }
 
 function getUserToken() {
@@ -16,9 +16,13 @@ function getUserId() {
     return userData?._id;
 }
 
+function clearUserData() {
+    sessionStorage.removeItem("userData")
+}
 export {
     setUserData,
     getUserData,
     getUserToken,
-    getUserId
+    getUserId,
+    clearUserData
 };

@@ -14,14 +14,13 @@ async function onRegister(e) {
     e.preventDefault();
     let formData = new FormData(e.target);
     let email = formData.get("email");
-    let pass = formData.get("password");
+    let password = formData.get("password");
     let rePass = formData.get("repeatPassword");
-
-    if (!email || !pass || pass.length < 6 || pass !== rePass) {
+    if (!email || !password || password.length < 6 || password !== rePass) {
         return alert("Error");
     }
-
-    const data = await register({ email, pass });
+    
+    const data = await register({ email, password });
     setUserData(data);
     updateNav();
     showHomeView();

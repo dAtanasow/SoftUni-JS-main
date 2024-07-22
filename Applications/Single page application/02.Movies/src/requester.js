@@ -1,6 +1,6 @@
 import { getUserToken } from "./userHelper.js";
 
-async function request(method, data, url) {
+async function request(method, url, data) {
     const option = {
         method
     }
@@ -12,16 +12,23 @@ async function request(method, data, url) {
     if (userToken) {
         headers["X-Authorization"] = userToken;
     }
-    option.headers = headers;
+    option[headers] = headers;
 
-    if(data) {
+    if (data) {
         option.body = JSON.stringify(data);
     }
 
-    const response = await fetch(url, option);
-    const responseData = await response.json();
+    try {
+        const response = await fetch(url, option);
+        if (response.status === 204) {
+            return response;
+        }
+        const responseData = await response.json();
+        return responseData;
+    } catch (error) {
+        return alert(error);
+    }
 
-    return responseData;
 }
 
 const get = (url) => {
