@@ -23,6 +23,7 @@ async function request(method, url, data) {
         if (response.status === 204) {
             return response;
         }
+    
         const responseData = await response.json();
         return responseData;
     } catch (error) {
