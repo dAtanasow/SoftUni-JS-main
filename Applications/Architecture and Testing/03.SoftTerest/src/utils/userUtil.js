@@ -1,5 +1,5 @@
 function getUser() {
-    return JSON.parse(sessionStorage.getItem("userData"));
+    return sessionStorage.getItem("userData") && JSON.parse(sessionStorage.getItem("userData"));
 }
 
 function setUser(userData) {

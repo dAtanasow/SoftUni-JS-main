@@ -3,7 +3,7 @@ function setUserData(userData) {
 }
 
 function getUserData() {
-    return JSON.parse(sessionStorage.getItem("userData"));
+    return sessionStorage.getItem("userData") && JSON.parse(sessionStorage.getItem("userData"));
 }
 
 function getUserToken() {

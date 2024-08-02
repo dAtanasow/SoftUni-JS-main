@@ -15,13 +15,12 @@ async function onLogin(e) {
     e.preventDefault();
     let formData = new FormData(e.target);
     let email = formData.get("email");
-    let pass = formData.get("password");
+    let password = formData.get("password");
 
-    if (!email || !pass) {
+    if (!email || !password) {
         return alert("Error Login");
     }
-
-    const data = await login({ email, pass });
+    const data = await login({ email, password });
     setUserData(data);
     updateNav();
     showHomeView();
