@@ -45,6 +45,6 @@ async function onLogin(e) {
 
     const userData = await login({ email, password });
     util.setUser(userData);
-    context.goTo("/");
+    context.goTo("/dashboard");
     updateNav();
 }

@@ -94,5 +94,5 @@ async function onEdit(e) {
 
     const item = { make, model, year, description, price, img, material }
     await dataService.updateFurniture(itemId, item);
-    context.goTo("/");
+    context.goTo("/dashboard");
 }

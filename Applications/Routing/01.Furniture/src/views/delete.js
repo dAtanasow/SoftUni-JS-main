@@ -5,6 +5,6 @@ export async function deleteItem(ctx) {
     const res = confirm("delete");
     if(res) {
         await dataService.delFurniture(id);
-        ctx.goTo("/");
+        ctx.goTo("/dashboard");
     }
 }

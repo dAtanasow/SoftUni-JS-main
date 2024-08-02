@@ -53,6 +53,6 @@ async function onRegister(e) {
 
     const userData = await register({email, password});
     util.setUser(userData);
-    context.goTo("/");
+    context.goTo("/dashboard");
     updateNav();
 }

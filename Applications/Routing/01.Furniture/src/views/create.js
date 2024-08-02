@@ -91,5 +91,5 @@ async function onCreate(e) {
     
     const item = { make, model, year, description, price, img, material };
     await dataService.createFurniture(item);
-    context.goTo("/");
+    context.goTo("/dashboard");
 }
