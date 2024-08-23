@@ -1,9 +1,9 @@
-import { get } from "./requester.js"
+import { get, post, del } from "./requester.js"
 
 const baseUrl = "http://localhost:3030/"
 const endPoints = {
     catalog: "data/movies",
-    addLike: "data/likes "
+    addLike: "data/likes"
 }
 
 export async function getAllMovies() {
@@ -20,4 +20,12 @@ export async function getLike(id) {
 
 export async function createLike(id) {
     return await post(baseUrl + endPoints.addLike, {"moviesId": id})
+}
+
+export async function createMovie(data) {
+    return await post(baseUrl + endPoints.catalog, data)
+}
+
+export async function deleteMovie(id) {
+    return await del(baseUrl + endPoints.catalog + "/" + id)
 }

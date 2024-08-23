@@ -1,31 +1,36 @@
-import { getUserToken } from "./userHelper.js";
+import { clearUserData, getUserToken } from "./userHelper.js";
 
 async function request(method, url, data) {
     const option = {
-        method
-    }
+        method,
+        headers: {}
+    };
     const userToken = getUserToken();
-    const headers = {
-        'Content-type': 'application/json'
-    }
-
-    if (userToken) {
-        headers["X-Authorization"] = userToken;
-    }
-    option[headers] = headers;
-
+    
     if (data) {
         option.body = JSON.stringify(data);
-    }
+        option.headers['Content-type'] = 'application/json';
+    };
+
+    if (userToken) {
+        option.headers["X-Authorization"] = userToken;
+    };
 
     try {
         const response = await fetch(url, option);
+        if (!response.ok) {
+            if (response.status === 403) {
+                clearUserData();
+            }
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        
         if (response.status === 204) {
             return response;
         }
     
-        const responseData = await response.json();
-        return responseData;
+        return response.json();
     } catch (error) {
         return alert(error);
     }

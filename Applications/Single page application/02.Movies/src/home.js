@@ -1,6 +1,7 @@
 import { getAllMovies } from "./dataService.js";
 import { getUserId } from "./userHelper.js";
 import { showDetails } from "./details.js";
+import { showAddMovieView } from "./addMovie.js";
 const ul = document.getElementById("movies-list");
 
 export function showHomeView() {
@@ -14,7 +15,9 @@ export function showHomeView() {
     showAllMovies(userId);
 }
 function showAddBtn() {
-    document.getElementById("add-movie-button").style.display = "block";
+    const btn = document.getElementById("add-movie-button");
+    btn.style.display = "block"
+    btn.addEventListener("click", showAddMovieView)
 }
 
 async function showAllMovies(userId) {

@@ -22,6 +22,6 @@ async function onLogin(e) {
     }
     const data = await login({ email, password });
     setUserData(data);
-    updateNav();
+    updateNav(data.email);
     showHomeView();
 }

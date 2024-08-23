@@ -3,6 +3,7 @@ import { showRegisterView } from "./register.js";
 import { showLoginView } from "./login.js";
 import { getUserData } from "./userHelper.js";
 import { showLogout } from "./logout.js";
+import { showAddMovieView } from "./addMovie.js";
 
 document.querySelectorAll("section").forEach(x => { x.style.display = 'none' });
 document.querySelector('nav').addEventListener('click', onNavigate);
@@ -16,7 +17,8 @@ const routes = {
     "/register": showRegisterView,
     "/login": showLoginView,
     "/home": showHomeView,
-    "/logout": showLogout
+    "/logout": showLogout,
+    "/addMovie": showAddMovieView
 }
 
 export function onNavigate(e) {
@@ -29,12 +31,12 @@ export function onNavigate(e) {
     routes[path]();
 }
 
-export function updateNav() {
+export function updateNav(email) {
     const userData = getUserData();
     if (userData) {
         userNav.forEach(li => { li.style.display = 'block' })
         guestNav.forEach(li => { li.style.display = 'none' })
-        userMsg.textContent = `Welcome, ${userData.email}`
+        userMsg.textContent = `Welcome, ${email}`
     } else {
         userNav.forEach(li => { li.style.display = 'none' })
         guestNav.forEach(li => { li.style.display = 'block' })

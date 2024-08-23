@@ -22,6 +22,6 @@ async function onRegister(e) {
     
     const data = await register({ email, password });
     setUserData(data);
-    updateNav();
+    updateNav(data.email);
     showHomeView();
 }
