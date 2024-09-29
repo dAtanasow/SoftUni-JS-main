@@ -1,13 +1,22 @@
 const express = require("express");
 const { hbsConfig } = require("./config/hbs");
 const { expressConfig } = require("./config/express");
-const { router } = require("./config/routes");
+const { databaseConfig } = require("./config/database");
+const { routesConfig } = require("./config/routes");
 
-const app = express();
 const port = process.env.port || 3000;
 
-hbsConfig(app);
-expressConfig(app);
-app.use(router);
+async function start() {
+    const app = express();
 
-app.listen(port);
+    await databaseConfig()
+    hbsConfig(app);
+    expressConfig(app);
+    routesConfig(app);
+    
+    app.listen(port, () => {
+        console.log(`Application running on port: ${port}`);
+    });
+}
+
+start();

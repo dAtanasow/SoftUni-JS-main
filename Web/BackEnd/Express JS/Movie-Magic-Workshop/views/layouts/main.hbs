@@ -1,38 +1,45 @@
-<!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>{{{title}}}</title>
     <!-- Do not forget to change the path to the css file -->
-    <link href="/static/css/style.css" type="text/css" rel="stylesheet">
-</head>
+    <link href="/static/css/style.css" type="text/css" rel="stylesheet" />
+  </head>
 
-<body>
+  <body>
 
     <div id="box">
 
-        <nav>
-            <img src="/static/img/logo.webp" alt="logo">
+      <nav>
+        <img src="/static/img/logo.webp" alt="logo" />
 
-            <ul class="menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/create">Create Post</a></li>
-                <li><a href="/search">Search</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
+        <ul class="menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/search">Search</a></li>
+          <li><a href="/about">About</a></li>
+          {{#if hasUser}}
+          <!--Users-->
+          <li><a href="/create/movie">Create Movie</a></li>
+          <li><a href="/create/cast">Create Cast</a></li>
+          <li><a href="/logout">Logout</a></li>
+          {{else}}
+          <!--Guest-->
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+          {{/if}}
+        </ul>
 
-        </nav>
+      </nav>
 
-
-        <main>
-          {{{body}}}
-        </main>
-        <footer>
-            © JS Back-End Workshop
-        </footer>
+      <main>
+        {{{body}}}
+      </main>
+      <footer>
+        © JS Back-End Workshop
+      </footer>
     </div>
 
-</body>
+  </body>
 
 </html>

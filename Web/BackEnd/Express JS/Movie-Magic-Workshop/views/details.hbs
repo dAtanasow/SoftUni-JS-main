@@ -20,11 +20,22 @@
 
         <p class="disc">{{description}}</p>
       </div>
+      {{#if isAuthor}}
+      <div class="details-btn">
+          <a id="edit-button" href="/edit/{{_id}}">Edit</a>
+          <a id="delete-button" href="/delete/{{_id}}">Delete</a>
+      </div>
+      {{/if}}
     </div>
     <div class="card_right">
       <img src="{{imageURL}}" alt="image" />
     </div>
   </div>
 
+    <div class="main-cast-card"></div>
+      {{#each cast}}
+      {{> cast}}
+      {{/each}}
+    </div>
 </section>
 {{/with}}
