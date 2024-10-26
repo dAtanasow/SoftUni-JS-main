@@ -1,0 +1,36 @@
+    <main>
+        <!-- In case of error, you should display div with class "errorContainer" -->
+        <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
+        {{#if errors}}
+        <div>
+          <div class="errorContainer">
+            {{#each errors}}
+              <p>{{this}}</p>
+            {{/each}}
+          </div>
+        </div>
+      {{/if}}
+  
+        <div class="register-box">
+            <h1>Register</h1>
+            <form method="post">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username.." {{#if data.username}} value="{{data.username}}"{{/if}}>
+                <label>Email</label>
+                <input type="text" name="email" placeholder="Email.." {{#if data.email}} value="{{data.email}}"{{/if}}>
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password..">
+                <label>Confirm Password</label>
+                <input type="password" name="repass" placeholder="Confirm Password..">
+                <input type="submit" value="Submit">
+            </form>
+            <p>Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy JS Back-End 2024</p>
+    </footer>
+</body>
+
+</html>

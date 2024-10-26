@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 require('../models/User');
-require('../models/Data');
+require('../models/Volcano');
 
-const connectionString = 'mongodb://localhost:27017/course-book';
+const connectionString = 'mongodb://localhost:27017/volcano';
 
 async function databaseConfig() {
     await mongoose.connect(connectionString);
