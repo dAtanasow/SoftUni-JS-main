@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('../models/User');
-require('../models/Data');
+require('../models/Course');
 
 const connectionString = 'mongodb://localhost:27017/course-book';
 
