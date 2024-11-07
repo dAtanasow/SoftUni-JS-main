@@ -22,7 +22,7 @@
 
       <ng-container *ngIf="inputEmail.touched">
         <p class="error" *ngIf="inputEmail.errors?.['required']">Email is required!</p>
-        <p class="error" *ngIf="inputEmail.errors?.[emailValidation]">Email is not valid!</p>
+        <p class="error" *ngIf="inputEmail.errors?.['emailValidator']">Email is not valid!</p>
       </ng-container>
 
       <p class="field field-icon">
@@ -43,10 +43,10 @@
 
       <ng-container *ngIf="inputPassword.touched"> 
         <p class="error" *ngIf="inputPassword.errors?.['required']" >Password is required!</p>
-        <p class="error" *ngIf="inputPassword.errors?.[minLength]" >Password must be at least 5 characters!</p>
+        <p class="error" *ngIf="inputPassword.errors?.['minLength']" >Password must be at least 5 characters!</p>
       </ng-container>
 
-      <button>Login</button>
+      <button [disabled]="form.invalid">Login</button>
 
       <p class="text-center">
         Have an account?

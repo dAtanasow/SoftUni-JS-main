@@ -11,10 +11,11 @@ import { ThemeModule } from './theme/theme.module';
 import { AddThemeComponent } from './theme/add-theme/add-theme.component';
 import { UserModule } from './user/user.module';
 import { ErrorComponent } from './error/error.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [AddThemeComponent, HomeComponent, AppComponent, ErrorComponent],
+  declarations: [ HomeComponent, AppComponent, ErrorComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -22,7 +23,7 @@ import { ErrorComponent } from './error/error.component';
     SharedModule,
     ThemeModule,
     UserModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],

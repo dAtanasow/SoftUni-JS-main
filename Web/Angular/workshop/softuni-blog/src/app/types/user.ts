@@ -1,4 +1,4 @@
-import { Post } from "./posts";
+import { Post } from './posts';
 
 export interface User {
   themes: string[];
@@ -19,4 +19,10 @@ export interface UserForAuth {
   phoneNumber: string;
   password: string;
   id: string;
+}
+
+export interface ProfileDetails {
+  username: string;
+  email: string;
+  tel: string;
 }
