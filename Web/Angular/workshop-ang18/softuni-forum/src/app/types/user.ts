@@ -1,6 +1,8 @@
+import { Post } from "./post";
+
 export interface User {
     themes: string[];
-    posts: string[];
+    posts: Post[];
     _id: string;
     tel: string;
     email: string;
@@ -11,3 +13,10 @@ export interface User {
     __v: number;
   }
   
+  export interface UserForAuth {
+    firstName: string;
+    email: string;
+    phoneNumber: string;
+    password: string;
+    id: string;
+  }
