@@ -1,3 +1,4 @@
+const { Router } = require('express');
 const { Schema, model, Types } = require('mongoose');
 
 const animalSchema = new Schema({
@@ -40,3 +41,4 @@ const animalSchema = new Schema({
 });
 const Animal = model('Animal', animalSchema);
 module.exports = { Animal };
+

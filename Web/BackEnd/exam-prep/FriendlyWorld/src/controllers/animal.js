@@ -1,9 +1,8 @@
+const { Router } = require('express');
 const { body, validationResult } = require("express-validator");
 const { isUser } = require("../middlewares/guards");
-const { Router } = require('express');
 const { parseError } = require("../../utils");
 const { create, update, getById, deleteById, donate } = require("../services/animal");
-const { log } = require("npmlog");
 
 const animalRouter = Router();
 
@@ -97,7 +96,7 @@ animalRouter.get('/delete/:id', isUser(), async (req, res) => {
 animalRouter.get('/donate/:id', isUser(), async (req, res) => {
     const animalId = req.params.id;
     const userId = req.user._id;
-    
+
     try {
         result = await donate(animalId, userId);
         res.redirect('/dashboard/' + animalId);
