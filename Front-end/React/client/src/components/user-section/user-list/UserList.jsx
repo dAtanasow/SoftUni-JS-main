@@ -1,7 +1,8 @@
 import React from "react";
 import UserItem from "./user-item/UserItem";
 
-export default function UserList() {
+export default function UserList({users}) {
+    
   return (
     <>
       <div className="table-wrapper">
@@ -104,8 +105,7 @@ export default function UserList() {
             </tr>
           </thead>
           <tbody>
-            {/* <!-- Table row component --> */}
-            <UserItem />
+            {users.map((user) =>  <UserItem  key={user._id} user={user} />)}
           </tbody>
         </table>
       </div>
