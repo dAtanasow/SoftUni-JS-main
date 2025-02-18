@@ -1,7 +1,11 @@
 import React from "react";
 import { formatDate } from "../../../../utils/date";
 
-export default function UserItem({ user }) {
+export default function UserItem({
+  user,
+  onUserDetailsClick,
+  onUserDeleteClick,
+}) {
   return (
     <>
       <tr>
@@ -36,7 +40,11 @@ export default function UserItem({ user }) {
               ></path>
             </svg>
           </button>
-          <button className="btn delete-btn" title="Delete">
+          <button
+            className="btn delete-btn"
+            title="Delete"
+            onClick={() => onUserDeleteClick(user._id)}
+          >
             <svg
               aria-hidden="true"
               focusable="false"
@@ -53,7 +61,11 @@ export default function UserItem({ user }) {
               ></path>
             </svg>
           </button>
-          <button className="btn info-btn" title="Info">
+          <button
+            className="btn info-btn"
+            title="Info"
+            onClick={() => onUserDetailsClick(user._id)}
+          >
             <svg
               aria-hidden="true"
               focusable="false"

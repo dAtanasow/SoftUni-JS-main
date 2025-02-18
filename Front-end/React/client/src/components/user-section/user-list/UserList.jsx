@@ -1,8 +1,11 @@
 import React from "react";
 import UserItem from "./user-item/UserItem";
 
-export default function UserList({users}) {
-    
+export default function UserList({
+  users,
+  onUserDetailsClick,
+  onUserDeleteClick,
+}) {
   return (
     <>
       <div className="table-wrapper">
@@ -105,10 +108,17 @@ export default function UserList({users}) {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) =>  <UserItem  key={user._id} user={user} />)}
+            {users.map((user) => (
+              <UserItem
+                key={user._id}
+                user={user}
+                onUserDetailsClick={onUserDetailsClick}
+                onUserDeleteClick={onUserDeleteClick}
+              />
+            ))}
           </tbody>
         </table>
       </div>
     </>
-  )
+  );
 }
