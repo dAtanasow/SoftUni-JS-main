@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import gamesAPI from "../api/games-api";
+import gamesApi from "../api/games-api";
 
 export function useGetAllGames() {
 
@@ -7,12 +7,24 @@ export function useGetAllGames() {
 
     useEffect(() => {
         (async () => {
-            const result = await gamesAPI.getAll();
+            const result = await gamesApi.getAll();
 
             setGames(result);
         })();
     }, []);
 
     return [games, setGames];
+}
 
+export function useGetOneGame(gameId) {
+    const [game, setGame] = useState({});
+
+    useEffect(() => {
+        (async () => {
+            const result = await gamesApi.getOne(gameId);
+            setGame(result);
+        })();
+    }, [gameId]);
+
+    return [game, setGame];
 }
