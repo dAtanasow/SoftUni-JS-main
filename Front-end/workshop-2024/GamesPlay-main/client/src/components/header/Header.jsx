@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import withAuth from "../../HOC/withAuth";
 
-export default function Header() {
-  const { isAuthenticate } = useContext(AuthContext);
+function Header({ auth }) {
+  const { isAuthenticate } = auth;
   return (
     <header>
       <h1>
@@ -28,3 +27,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default withAuth(Header);
