@@ -10,7 +10,7 @@ export default function GameDetails() {
   const { gameId } = useParams();
   const [comments, dispatch] = useGetAllComments(gameId);
   const createComment = useCreateComment();
-  const { email } = useAuthContext();
+  const { email, userId } = useAuthContext();
   const [game] = useGetOneGame(gameId);
   const { isAuthenticated } = useAuthContext();
   const { changeHandler, submitHandler, values } = useForm(
@@ -27,6 +27,8 @@ export default function GameDetails() {
       }
     }
   );
+
+  const isOwner = userId === game._ownerId;
 
   return (
     <section id="game-details">
@@ -57,14 +59,16 @@ export default function GameDetails() {
         </div>
 
         {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
-        <div className="buttons">
-          <a href="#" className="button">
-            Edit
-          </a>
-          <a href="#" className="button">
-            Delete
-          </a>
-        </div>
+        {isOwner && (
+          <div className="buttons">
+            <a href="#" className="button">
+              Edit
+            </a>
+            <a href="#" className="button">
+              Delete
+            </a>
+          </div>
+        )}
       </div>
 
       {/* <!-- Bonus -->

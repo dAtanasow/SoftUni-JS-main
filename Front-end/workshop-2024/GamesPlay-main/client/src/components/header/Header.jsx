@@ -28,4 +28,6 @@ function Header({ auth }) {
   );
 }
 
-export default withAuth(Header);
+const EnhancedComponent = withAuth(Header);
+
+export default EnhancedComponent;

@@ -7,14 +7,14 @@ import Register from "./components/register/Register";
 import GamesCatalog from "./components/game-catalog/GamesCatalog";
 import GameCreate from "./components/game-create/GameCreate";
 import GameDetails from "./components/game-details/GameDetails";
-import { AuthContextProvider } from "./contexts/AuthContext";
+import { AuthContextProvider } from "./contexts/AuthProvider";
 import Logout from "./components/logout/Logout";
 
 function App() {
   return (
     <AuthContextProvider>
       <div id="box">
-        <Header />
+      <Header />
         <main id="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
