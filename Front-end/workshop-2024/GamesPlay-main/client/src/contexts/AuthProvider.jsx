@@ -1,7 +1,7 @@
 import { AuthContext } from "./AuthContext";
 import usePersistedState from "../hooks/usePersistedState";
 
-export function AuthContextProvider({ children }) {
+export default function AuthProvider({ children }) {
   const [authState, setAuthState] = usePersistedState("auth", null);
 
   const changeAuthState = (state) => {
@@ -22,8 +22,6 @@ export function AuthContextProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={contextData}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
   );
 }
