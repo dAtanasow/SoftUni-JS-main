@@ -8,8 +8,9 @@ const initialValues = { comment: "" };
 
 export default function GameDetails() {
   const { gameId } = useParams();
-  const [comments, setComments] = useGetAllComments(gameId);
+  const [comments, dispatch] = useGetAllComments(gameId);
   const createComment = useCreateComment();
+  const { email } = useAuthContext();
   const [game] = useGetOneGame(gameId);
   const { isAuthenticated } = useAuthContext();
   const { changeHandler, submitHandler, values } = useForm(
@@ -17,9 +18,12 @@ export default function GameDetails() {
     async ({ comment }) => {
       try {
         const newComment = await createComment(gameId, comment);
-        setComments((oldComments) => [...oldComments, newComment]);
+        dispatch({
+          type: "ADD_COMMENT",
+          payload: { ...newComment, author: { email } },
+        });
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
       }
     }
   );
