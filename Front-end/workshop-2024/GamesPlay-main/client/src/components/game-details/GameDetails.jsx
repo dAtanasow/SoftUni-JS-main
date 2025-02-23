@@ -8,14 +8,19 @@ const initialValues = { comment: "" };
 
 export default function GameDetails() {
   const { gameId } = useParams();
-  const [comments, setCommnets] = useGetAllComments(gameId);
+  const [comments, setComments] = useGetAllComments(gameId);
   const createComment = useCreateComment();
   const [game] = useGetOneGame(gameId);
   const { isAuthenticated } = useAuthContext();
   const { changeHandler, submitHandler, values } = useForm(
     initialValues,
-    ({ comment }) => {
-      createComment(gameId, comment);
+    async ({ comment }) => {
+      try {
+        const newComment = await createComment(gameId, comment);
+        setComments((oldComments) => [...oldComments, newComment]);
+      } catch (err) {
+        console.log(err);
+      }
     }
   );
 
