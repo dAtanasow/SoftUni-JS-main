@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import { login, logout, register } from "../api/auth-api"
 import { useAuthContext } from "../contexts/AuthContext";
+
 
 export const useLogin = () => {
     const { changeAuthState } = useAuthContext()
@@ -27,10 +29,26 @@ export const useRegister = () => {
 }
 
 export const useLogout = () => {
-    const { logout: localLogout } = useAuthContext()
+    const navigate = useNavigate();
+
+    const { logout: localLogout, accessToken } = useAuthContext()
     const logoutHandler = async () => {
-        localLogout();
-        await logout();
+        if (!accessToken) {
+            console.log("No active session detected.");
+            localLogout();
+            navigate("/");
+            return;
+        }
+
+        try {
+
+            await logout();
+            localLogout();
+            navigate("/");
+        } catch (error) {
+            console.error("Error during logout:", error);
+
+        }
     }
 
     return logoutHandler;
