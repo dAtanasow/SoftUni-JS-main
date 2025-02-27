@@ -1,20 +1,21 @@
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-
-const initialValues = {
-  title: "",
-  category: "",
-  maxLevel: "",
-  imageUrl: "",
-  summary: "",
-};
+import { useGetOneGame } from "../../hooks/useGames";
+import gamesApi from "../../api/games-api";
 
 export default function GameEdit() {
+  const navigate = useNavigate();
+  const { gameId } = useParams();
+  const [game] = useGetOneGame(gameId);
+
   const { changeHandler, submitHandler, values } = useForm(
-    initialValues,
-    (values) => {
-      console.log(values);
+    game,
+    async (values) => {
+      await gamesApi.update(gameId, values);
+      navigate(`/games/${gameId}/details`);
     }
   );
+
   return (
     <section id="edit-page" className="auth">
       <form id="edit" onSubmit={submitHandler}>
@@ -62,8 +63,9 @@ export default function GameEdit() {
             onChange={changeHandler}
             name="summary"
             id="summary"
+            value={values.summary}
           ></textarea>
-          <input className="btn submit" type="submit" value={values.summary} />
+          <input className="btn submit" type="submit" value="Edit" />
         </div>
       </form>
     </section>
