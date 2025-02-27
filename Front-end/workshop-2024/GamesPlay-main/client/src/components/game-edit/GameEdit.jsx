@@ -13,7 +13,8 @@ export default function GameEdit() {
     async (values) => {
       await gamesApi.update(gameId, values);
       navigate(`/games/${gameId}/details`);
-    }
+    },
+    { reinitializeForm: true }
   );
 
   return (

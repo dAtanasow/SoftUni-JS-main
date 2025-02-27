@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 
-export function useForm(initialValues, submitCallback) {
+export function useForm(initialValues, submitCallback, options = { reinitializeForm: true }) {
     const [values, setValues] = useState(initialValues);
 
     useEffect(() => {
-        setValues(initialValues)
-    }, [initialValues]);
+        if (options.reinitializeForm) {
+            setValues(initialValues)
+        }
+    }, [initialValues, options
+    ]);
 
     const changeHandler = (e) => {
         setValues(state => ({
