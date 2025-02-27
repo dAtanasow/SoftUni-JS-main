@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetOneGame } from "../../hooks/useGames";
 import { useForm } from "../../hooks/useForm";
 import { useGetAllComments, useCreateComment } from "../../hooks/useComments";
@@ -9,17 +9,19 @@ const initialValues = { comment: "" };
 
 export default function GameDetails() {
   const navigate = useNavigate();
-  const { gameId } = useParams();
-  const [comments, dispatch] = useGetAllComments(gameId);
   const createComment = useCreateComment();
-  const { email, userId } = useAuthContext();
+
+  const { gameId } = useParams();
   const [game] = useGetOneGame(gameId);
-  const { isAuthenticated } = useAuthContext();
+  const [comments, dispatch] = useGetAllComments(gameId);
+  const { email, userId } = useAuthContext();
+  const { isAuthenticate } = useAuthContext();
+
   const { changeHandler, submitHandler, values } = useForm(
     initialValues,
-    async ({ comment }) => {
+    ({ comment }) => {
       try {
-        const newComment = await createComment(gameId, comment);
+        const newComment = createComment(gameId, comment);
         dispatch({
           type: "ADD_COMMENT",
           payload: { ...newComment, author: { email } },
@@ -72,9 +74,9 @@ export default function GameDetails() {
         {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
         {isOwner && (
           <div className="buttons">
-            <a href="#" className="button">
+            <Link to={`/games/${gameId}/edit`} className="button">
               Edit
-            </a>
+            </Link>
             <a href="#" onClick={gameDeleteHandler} className="button">
               Delete
             </a>
@@ -84,7 +86,7 @@ export default function GameDetails() {
 
       {/* <!-- Bonus -->
         <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) --> */}
-      {isAuthenticated && (
+      {isAuthenticate && (
         <article className="create-comment">
           <label>Add new comment:</label>
           <form className="form" onSubmit={submitHandler}>

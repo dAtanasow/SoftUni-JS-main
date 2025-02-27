@@ -13,9 +13,9 @@ export default function GameCreate() {
   const navigate = useNavigate();
   const createGame = useCreateGame();
 
-  const createHandler = (values) => {
+  const createHandler = async (values) => {
     try {
-      const { _id } = createGame(values);
+      const { _id } = await createGame(values);
       navigate(`/games/${_id}/details`);
     } catch (err) {
       // TODO: set error state and display errors

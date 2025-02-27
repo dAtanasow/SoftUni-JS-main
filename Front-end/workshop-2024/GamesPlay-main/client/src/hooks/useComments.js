@@ -3,10 +3,10 @@ import commentsAPI from "../api/comments-api";
 
 
 export function useCreateComment() {
-    const createHandler = (gameId, comment) => {
-        commentsAPI.create(gameId, comment)
+    const createHandler = async (gameId, comment) => {
+        await commentsAPI.create(gameId, comment)
     }
-    return createHandler
+    return createHandler;
 };
 
 function commentsReducer(state, action) {
@@ -26,7 +26,6 @@ export function useGetAllComments(gameId) {
     useEffect(() => {
         (async () => {
             const result = await commentsAPI.getAll(gameId);
-
             dispatch({ type: "GET_ALL", payload: result });
         })();
     }, [gameId]);
