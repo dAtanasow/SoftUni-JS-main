@@ -1354,7 +1354,8 @@
                 "maxLevel": "4",
                 "imageUrl": "/images/avatar-1.jpg",
                 "summary": "The primary one involves a series of sniper murders of high-profile persons. Detective Alex Cross and Bree Stone are planning their wedding, but must put their wedding plans on hold to investigate the few clues of the first set of murders and then try to find the perpetrators as more murders are committed.",
-                "_id": "eb37300f-7c11-4038-93b7-4b7c32a7925b"
+                "_id": "eb37300f-7c11-4038-93b7-4b7c32a7925b",
+                _createdOn: 1613551344360
             },
             "81bd775a-53e1-41f5-ac76-31d209300694": {
                 "title": "StarCraft",
@@ -1362,7 +1363,8 @@
                 "maxLevel": "15",
                 "imageUrl": "https://www.giantbomb.com/a/uploads/scale_small/8/82063/2843328-sc2_heart_of_the_swarm_cover.jpg",
                 "summary": "The storyline covers the fortunes of these three races and their leaders, fighting for dominance in a remote region of the galaxy.",
-                "_id": "81bd775a-53e1-41f5-ac76-31d209300694"
+                "_id": "81bd775a-53e1-41f5-ac76-31d209300694",
+                _createdOn: 1613551344360
             }
         },
         recipes: {

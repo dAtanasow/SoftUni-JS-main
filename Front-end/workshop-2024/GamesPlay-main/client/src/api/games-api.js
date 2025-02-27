@@ -18,13 +18,30 @@ export const remove = (gameId) => request.del(`${BASE_URL}/${gameId}`);
 
 export const update = (gameId, gameData) => request.put(`${BASE_URL}/${gameId}`, gameData);
 
+export const getLatest = async () => {
+    const urlSearchParams = new URLSearchParams({
+        sortBy: `_createdOn desc`,
+        pageSize: 3
+    })
+    try {
+        const result = await request.get(`${BASE_URL}?${urlSearchParams.toString()}`);
+
+        const latestGames = Object.values(result);
+
+        return latestGames;
+    } catch (error) {
+        console.error("Error fetching games:", error);
+        return [];
+    }
+};
 
 const gamesApi = {
     getAll,
     getOne,
     create,
     remove,
-    update
+    update,
+    getLatest
 };
 
 export default gamesApi;

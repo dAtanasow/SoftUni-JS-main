@@ -7,11 +7,10 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const result = await gamesApi.getAll();
-
-      setLatestGames(result.reverse().slice(0, 3));
-    })([]);
-  });
+      const result = await gamesApi.getLatest();
+      setLatestGames(result);
+    })();
+  }, []);
   return (
     <section id="welcome-world">
       <div className="welcome-message">

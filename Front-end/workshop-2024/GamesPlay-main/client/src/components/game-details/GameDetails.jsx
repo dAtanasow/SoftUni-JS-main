@@ -19,9 +19,9 @@ export default function GameDetails() {
 
   const { changeHandler, submitHandler, values } = useForm(
     initialValues,
-    ({ comment }) => {
+    async ({ comment }) => {
       try {
-        const newComment = createComment(gameId, comment);
+        const newComment = await createComment(gameId, comment);
         dispatch({
           type: "ADD_COMMENT",
           payload: { ...newComment, author: { email } },
@@ -39,7 +39,7 @@ export default function GameDetails() {
     if (!isConfirmed) {
       return;
     }
-    
+
     try {
       await gamesApi.remove(gameId);
       navigate("/");

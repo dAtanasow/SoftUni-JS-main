@@ -4,7 +4,8 @@ import commentsAPI from "../api/comments-api";
 
 export function useCreateComment() {
     const createHandler = async (gameId, comment) => {
-        await commentsAPI.create(gameId, comment)
+        const newComment = await commentsAPI.create(gameId, comment);
+        return newComment;
     }
     return createHandler;
 };
